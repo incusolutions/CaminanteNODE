@@ -1,0 +1,46 @@
+@font-face {
+    font-family: 'VT323';
+    src: url('VT323-Regular.ttf');
+}
+
+
+*{font-family: 'VT323', cursive;font-size:20px}
+body{background:#6B88FF;padding:0;margin:0;overflow-x:hidden; background: no-repeat center center fixed;   -webkit-background-size: 100%;-moz-background-size: 100%;-o-background-size:100%;background-size:100%; transition: background-image 0.5s ease;}
+b{font-size:30px;display: block;margin-bottom: 10px}
+a{color:blue}
+
+
+#scroll{top:50%;position:fixed;margin-top:-250px;width:4000px}
+#floor{width:100%;height:322px;position:fixed;bottom:-3px;background:url('img/floor.png') repeat-x left bottom}
+#mario{background:url('img/mario.png') left top;width:80px;height:93px;position:fixed;bottom:66px;left:50%;margin-left:-21px;}
+
+.box{float:left;margin-left:90px;padding:15px;width:300px;height:330px}
+.date{float:right;color:#666}
+
+.noche{ background: url('img/noche.jpg') no-repeat !important; -webkit-background-size:100%   }
+.dia{ background: url('img/dia.jpg') no-repeat !important; -webkit-background-size:100%;   }
+
+
+/* iphone */
+/* landscape and portrait */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+
+	#scroll{top:0;margin-top:0}
+	.box{padding:5px;width:200px;height:145px;letter-spacing:-1px;margin-left:70px;}
+	b,*{font-size:15px;line-height: 11px;}
+	.share{display:none}
+
+
+	
+	#floor{height:68px;background-image:url('img/floor_mid.png');}
+	#mario{background-image:url('img/mario_mid.png');width:40px;height:75px;position:fixed;bottom:30px;left:50%;margin-left:-10px;}
+	
+}
+
+/* portrait */
+@media only screen 
+and (max-width : 320px) {
+	#scroll{top:50%;margin-top:-100px}	
+}

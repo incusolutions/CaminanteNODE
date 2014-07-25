@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dia-noche</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="public/game.js"></script>
+	<link href="estilo.css" rel="stylesheet">
+
+	<script src="http://72.14.184.91:5000/socket.io/socket.io.js"></script>
+
+	<script>
+		//var socket = io.connect('/');
+		var socket = io.connect("http://72.14.184.91:5000");
+	</script>
+	
+</head>
+<body class="grey">
+
+
+<style>
+body{background:#ccc}
+.grey {-webkit-filter: grayscale(100%);}
+</style>
+
+<div id="scroll">
+	<div class="box">
+		<img id="qr">
+	</div>
+	<div class="box">
+		
+	</div>
+	<div class="box">
+	
+	</div>
+	<div class="box">
+	
+	</div>	
+	
+	<div class="box">
+		
+	</div>
+	<div class="box">
+	
+	</div>
+	<div class="box">
+		
+	</div>
+</div>
+
+
+<div id="floor">
+	<img id="mario" src="img/blank.png" alt="mario bros">
+</div>
+
+
+
+
+
+<script>
+var interval_left, interval_right;
+
+$(function() {
+
+	socket.on('connect', function () {
+		$('#qr').attr('src','https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://72.14.184.91/node/caminante/controller/controller.html?id=' + socket.socket.sessionid);
+	});
+
+	
+	socket.on('send_connection', function() {
+		$("body").removeClass('grey').css('background-image','url(img/dia.jpg)');
+		$("body").css('-webkit-background-size','100%');
+		$('#qr').hide();
+    });
+    
+    ////////////////
+    
+	socket.on('send_left', function() {
+        direction = false;
+        interval_left = setInterval(function(){
+	        moveTo('left');
+	    },100);
+    });
+    
+	socket.on('send_right', function() {
+        direction = false;        
+        interval_right = setInterval(function(){
+	        moveTo('right');
+	    },100);
+    });
+        
+	socket.on('send_stop', function() {
+		clearInterval(interval_left);
+		clearInterval(interval_right);
+    });  
+
+    socket.on('diac', function() {
+    	$("body").removeClass('noche');
+    	$("body").addClass('dia');
+    	//$("body").css('background-image','url(img/dia.jpg)');
+		//$("body").css('-webkit-background-size','cover');
+		
+    });  
+
+     socket.on('nochec', function() {
+     	$("body").removeClass('dia');
+     	$("body").addClass('noche');
+		//$("body").css('background-image','url(img/noche.jpg)').fadein;
+		//$("body").css('-webkit-background-size','cover');
+     
+    });     
+
+});
+</script>
+
+
+
+
+</body>
+</html>
